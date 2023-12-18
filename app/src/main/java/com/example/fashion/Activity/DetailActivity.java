@@ -1,4 +1,4 @@
-package com.example.fashion;
+package com.example.fashion.Activity;
 
 import android.app.Activity;
 

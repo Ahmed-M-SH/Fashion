@@ -5,7 +5,7 @@ plugins {
 android {
     namespace 'com.example.fashion'
     compileSdk 34
-و
+
     defaultConfig {
         applicationId "com.example.fashion"
         minSdk 23
