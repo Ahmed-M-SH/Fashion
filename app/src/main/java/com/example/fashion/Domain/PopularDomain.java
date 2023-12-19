@@ -67,13 +67,12 @@ public class PopularDomain implements Serializable {
         this.price = price;
     }
 
-    public PopularDomain(String title, String description, String picUrl, int review, double score, int numberinCart, double price) {
+    public PopularDomain(String title, String description, String picUrl, int review, double score, double price) {
         this.title = title;
         this.description = description;
         this.picUrl = picUrl;
         this.review = review;
         this.score = score;
-        this.numberinCart = numberinCart;
         this.price = price;
     }
 }

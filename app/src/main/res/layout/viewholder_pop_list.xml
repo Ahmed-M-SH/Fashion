@@ -59,9 +59,12 @@
         android:id="@+id/titleTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
         android:layout_margin="8dp"
+        android:singleLine="true"
+        android:text="Title"
         android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view5" />
 
@@ -71,6 +74,7 @@
         android:layout_height="wrap_content"
         android:text="$500"
         android:textColor="@color/red"
+        android:paddingStart="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleTxt" />
@@ -82,7 +86,9 @@
         app:layout_constraintBottom_toBottomOf="@+id/feeTxt"
         app:layout_constraintEnd_toEndOf="@+id/view5"
         app:layout_constraintTop_toTopOf="@+id/feeTxt"
-        app:srcCompat="@drawable/review" />
+        app:srcCompat="@drawable/review"
+        android:paddingEnd="7dp"
+        />
 
     <TextView
         android:id="@+id/reviewTxt"

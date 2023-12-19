@@ -21,7 +21,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="70dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -363,7 +364,9 @@
                 <TextView
                     android:id="@+id/textView20"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|top"
+
                     android:layout_weight="1"
                     android:text="see all"
                     android:textColor="@color/red" />
@@ -373,8 +376,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp" />
+                    android:clipToPadding="false"
+                    android:paddingStart="5px"
+                    android:paddingEnd="5px" />
             </LinearLayout>
 
 

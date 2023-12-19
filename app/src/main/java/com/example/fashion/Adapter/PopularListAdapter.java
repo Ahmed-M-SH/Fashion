@@ -23,8 +23,8 @@ public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.
     ArrayList<PopularDomain> items;
     Context context;
 
-    public PopularListAdapter(Context context) {
-        this.context = context;
+    public PopularListAdapter(ArrayList<PopularDomain> items) {
+        this.items = items;
     }
 
     @NonNull
