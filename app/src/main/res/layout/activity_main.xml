@@ -403,6 +403,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/homeBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -413,8 +414,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         app:srcCompat="@drawable/btn_1" />
 
                     <TextView
@@ -428,6 +429,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/wishlistBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -438,8 +440,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         app:srcCompat="@drawable/btn_2" />
 
                     <TextView
@@ -447,12 +449,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Wishist"
+                        android:text="Wishlist"
                         android:textAlignment="center"
-                        android:textColor="@color/grey" />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/cartBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -463,8 +466,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         app:srcCompat="@drawable/btn_3" />
 
                     <TextView
@@ -474,10 +477,11 @@
                         android:layout_marginTop="4dp"
                         android:text="cart"
                         android:textAlignment="center"
-                        android:textColor="@color/grey" />
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/profileBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
@@ -488,8 +492,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         app:srcCompat="@drawable/btn_4" />
 
                     <TextView
@@ -499,7 +503,7 @@
                         android:layout_marginTop="4dp"
                         android:text="Profile"
                         android:textAlignment="center"
-                        android:textColor="@color/grey" />
+                        android:textColor="@color/black" />
                 </LinearLayout>
             </LinearLayout>
 
