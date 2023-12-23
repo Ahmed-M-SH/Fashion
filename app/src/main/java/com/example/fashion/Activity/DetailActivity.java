@@ -66,13 +66,13 @@ public class DetailActivity extends Activity {
     private void initView() {
 //        private TextView titleTxt,feeTxt,descriptionTxt,reviewTxt,scoreTxt;
 
-        addToCartBtn = findViewById(R.id.addToCartBtr);
-        titleTxt = findViewById(R.id.titleText);
-        feeTxt = findViewById(R.id.priceTxt);
+        addToCartBtn = findViewById(R.id.addToCartBtn);
+        titleTxt = findViewById(R.id.titleTxt);
+        feeTxt = findViewById(R.id.feeTxt);
         descriptionTxt = findViewById(R.id.descriptionTxt);
-        reviewTxt = findViewById(R.id.reviewTex);
+        reviewTxt = findViewById(R.id.reviewTxt);
         scoreTxt=findViewById(R.id.scoreTxt);
-        picItem = findViewById(R.id.itemPic);
+        picItem = findViewById(R.id.MakUp);
 
     }
 }
