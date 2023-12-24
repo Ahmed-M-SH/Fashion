@@ -8,16 +8,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.fashion.Domain.PopularDomain;
 import com.example.fashion.Helper.ManagmentCart;
 import com.example.fashion.R;
 
-public class DetailActivity extends Activity {
+public class DetailActivity extends AppCompatActivity {
     private Button addToCartBtn;
-    private TextView titleTxt,feeTxt,descriptionTxt,reviewTxt,scoreTxt;
-    private ImageView picItem,backBtn;
+    private TextView titleTxt, feeTxt,descriptionTxt,reviewTxt,scoreTxt;
+    private ImageView picFood,backBtn;
     private PopularDomain object;
     private int numberOrder=1;
     private ManagmentCart managmentCart;
@@ -31,12 +32,8 @@ public class DetailActivity extends Activity {
         managmentCart = new ManagmentCart(this);
 
         backBtn=findViewById(R.id.backArrowBtn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        backBtn.setOnClickListener(view -> finish());
+        managmentCart=new ManagmentCart(this);
 
         initView();
         getBundle();
@@ -49,11 +46,11 @@ public class DetailActivity extends Activity {
 
         Glide.with(this)
                 .load(drawableResourceId)
-                .into(picItem);
+                .into(picFood);
 
-        titleTxt.setText(object.getTitle());
+        titleTxt.setText(""+object.getTitle());
         descriptionTxt.setText(object.getDescription());
-        reviewTxt.setText(object.getReview()+"");
+        reviewTxt.setText(""+object.getReview()+"");
         scoreTxt.setText(object.getScore()+"");
         feeTxt.setText("$"+object.getPrice());
 
@@ -71,8 +68,8 @@ public class DetailActivity extends Activity {
         feeTxt = findViewById(R.id.feeTxt);
         descriptionTxt = findViewById(R.id.descriptionTxt);
         reviewTxt = findViewById(R.id.reviewTxt);
-        scoreTxt=findViewById(R.id.scoreTxt);
-        picItem = findViewById(R.id.MakUp);
+        scoreTxt=findViewById(R.id.rateTxt);
+        picFood = findViewById(R.id.MakUp);
 
     }
 }
