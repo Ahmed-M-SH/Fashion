@@ -49,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
         item.add(new PopularDomain("asdflkjfhhkjhhhhhhh","sdkkkkkkkkkkkkkkkkkkkkkkkkkkkkdd\n" +
                 "sdddddddddddddddddddddddddddddddddddddddddddddddddddd\n" +
                 "dfffffffffffffffffffffffffffffffffffffffffffffffffffff\n" +
-                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbf\n","pic2",10,25,50025));
+                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbf\n" +
+                "gggfgfdgfdgfdgfdgdgfdgdgfdgfdgfdgdgdgdgdgdgf\n" +
+                "hjgfhgfhgfhfhgfhfhgfhfhfhfhfhfhf\n","pic2",10,25,50025));
         item.add(new PopularDomain("sdlkfjlsdjflsakjdf","iiiiiiiiiiiiiiiiiiiiiiiiiisoadifoosdf\n" +
                 "allllllllllllllllllllllllllllllllllllllllksdlf\n" +
                 "laksdddddkkkdkjfkgjgggggggggggggggggg\n" +

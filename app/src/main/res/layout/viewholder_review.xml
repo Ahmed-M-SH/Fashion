@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="8dp"
+        android:clipChildren="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -60,7 +60,7 @@
             app:srcCompat="@drawable/review" />
 
         <TextView
-            android:id="@+id/reviewTxt2"
+            android:id="@+id/reviewTxt"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
