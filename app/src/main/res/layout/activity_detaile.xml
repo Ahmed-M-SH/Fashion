@@ -133,7 +133,7 @@
                         android:progressTint="?android:attr/colorPressedHighlight"
                         android:rating="0"
                         android:stepSize="0.5"
-                       app:mrb_progressBackgroundTint="@color/yellow"
+                        app:mrb_progressBackgroundTint="@color/yellow"
                         app:mrb_secondaryProgressTint="@android:color/holo_orange_light" />
 
                     <TextView
@@ -252,35 +252,13 @@ mmmmmm" />
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recylerReview"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:scrollbarAlwaysDrawHorizontalTrack="false"
-                    android:scrollbarAlwaysDrawVerticalTrack="false"
-                    android:soundEffectsEnabled="false"
-                    android:splitMotionEvents="false"
-
+                    android:layout_height="105dp"
+                    android:layout_marginTop="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/reviweTaxt"
-                    app:stackFromEnd="false">
+                    app:layout_constraintTop_toBottomOf="@+id/reviweTaxt">
 
                 </androidx.recyclerview.widget.RecyclerView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/editTextReview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="تعليق جديد"
-                    app:layout_constraintBottom_toBottomOf="@+id/button2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/button2" />
 
                 <Button
                     android:id="@+id/button2"
@@ -290,9 +268,21 @@ mmmmmm" />
                     android:background="@drawable/backgrond_color_btn_review"
                     android:text="ارسال"
                     android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/recylerReview" />
+
+                <EditText
+                    android:id="@+id/editTextReview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="تعليق جديد"
+                    app:layout_constraintBottom_toBottomOf="@+id/button2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/button2" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
