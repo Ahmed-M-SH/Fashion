@@ -132,9 +132,9 @@
                         android:id="@+id/imageView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/textView6"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="1.0"
                         app:srcCompat="@drawable/girl" />
@@ -148,7 +148,7 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/textView3"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -170,6 +170,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_categorie"
                 android:layout_width="match_parent"
+                android:background="@color/light_pink"
                 android:layout_height="80dp" />
 
             <LinearLayout
@@ -179,25 +180,27 @@
                 android:layout_marginEnd="24dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="popular product"
-                    android:textColor="@color/black"
-                    android:textSize="19dp"
-                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end|top"
-
+                    android:layout_gravity="start|top"
                     android:layout_weight="1"
                     android:text="see all"
-                    android:textColor="@color/red" />
+                    android:textColor="@color/red"/>
+
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="end"
+                    android:text="popular product"
+                    android:textColor="@color/black"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/view1"

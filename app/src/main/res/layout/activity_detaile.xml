@@ -63,7 +63,7 @@
                     android:layout_height="250dp"
                     android:layout_margin="16dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/grey_background"
+                    android:background="@drawable/background_light_pink"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.531"
                     app:layout_constraintStart_toStartOf="parent"
@@ -260,7 +260,7 @@ mmmmmm" />
 
                 </androidx.recyclerview.widget.RecyclerView>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button2"
                     style="@android:style/Widget.Button"
                     android:layout_width="wrap_content"
@@ -285,7 +285,8 @@ mmmmmm" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
+
                 android:id="@+id/addToCartBtn"
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
