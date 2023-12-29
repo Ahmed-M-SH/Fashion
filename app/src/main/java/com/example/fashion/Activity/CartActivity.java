@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,6 +26,7 @@ private TextView totalFeeTxt,taxTxt,deliveryTxt,totalTxt,emptyTxt;
 private double tax;
 private ScrollView scrollView;
 private ImageView backBtn;
+private ImageView address;
 
 
     @Override
@@ -37,6 +40,7 @@ private ImageView backBtn;
         initList();
         calculateCart();
     }
+
 
     private void initList() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
@@ -69,6 +73,7 @@ private ImageView backBtn;
 
     }
 
+
     private void setVariable() {
         backBtn.setOnClickListener(view -> finish());
     }
@@ -82,6 +87,7 @@ private ImageView backBtn;
         scrollView=findViewById(R.id.scrollView4);
         backBtn=findViewById(R.id.backArrowBtn);
         emptyTxt=findViewById(R.id.emptyTxt);
+        address=findViewById(R.id.address);
 
     }
 }

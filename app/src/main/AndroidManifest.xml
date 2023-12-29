@@ -12,6 +12,15 @@
         android:theme="@style/Theme.Fashion"
         tools:targetApi="31">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FovoriteActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.splashActivity"
             android:exported="false" />
         <activity

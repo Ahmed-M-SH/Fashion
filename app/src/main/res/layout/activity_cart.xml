@@ -241,7 +241,7 @@
                     app:srcCompat="@drawable/credit_card" />
 
                 <ImageView
-                    android:id="@+id/imageView19"
+                    android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView35"

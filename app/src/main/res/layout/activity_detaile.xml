@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ExtraText">
@@ -101,6 +102,7 @@
                         android:textColor="@color/black"
                         android:textSize="20dp"
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/titleTxt"
                         android:layout_width="match_parent"
@@ -209,14 +211,14 @@
                 android:id="@+id/descriptionTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:layout_margin="8dp"
-                android:maxLines="3"
-                android:textSize="16dp"
                 android:ellipsize="end"
+                android:maxLines="3"
                 android:text="kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
                 kkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-mmmmmm" />
+mmmmmm"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/readMoreTxt"
@@ -235,7 +237,7 @@ mmmmmm" />
                 android:background="@color/grey"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -285,19 +287,23 @@ mmmmmm" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-
-                android:id="@+id/addToCartBtn"
-                style="@android:style/Widget.Button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@drawable/red_button"
-                android:text="Buy Now"
-                android:textColor="@color/white"
-                android:textSize="18dp" />
-
         </LinearLayout>
     </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+
+        android:id="@+id/addToCartBtn"
+        style="@android:style/Widget.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/red_button"
+        android:text="Buy Now"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
