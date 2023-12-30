@@ -5,6 +5,7 @@ import static com.example.fashion.R.id.fovortieBtn;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
@@ -60,29 +61,56 @@ public class DetailActivity extends AppCompatActivity {
         getBundle();
         setReadMoreLink();
 
+
         ImageView shareButton = findViewById(R.id.shareButton);
         shareButton.setOnClickListener(new View.OnClickListener() {
-
+            private String productName = "اسم المنتج";
 
             @Override
             public void onClick(View v) {
-                // قم بتنفيذ الإجراءات التي تود تنفيذها عند النقر على زر المشاركة
-                // على سبيل المثال، يمكنك فتح نافذة المشاركة وتضمين رابط
-                String productId = String.valueOf(titleTxt); // معرف المنتج
-                String appPackageName = "com.example.fashion"; // حزمة التطبيق الخاص بك
-                String url = "appfashion://Detail?id=" + productId; // الرابط الذي يحتوي على معرف المنتج
+                String productId = "titleTxt"; // معرف المنتج
+                String baseUrl = "https://example.com/product"; // الجزء الثابت من الرابط
+
+                Uri.Builder builder = Uri.parse(baseUrl).buildUpon();
+                builder.appendQueryParameter("id", productId);
+                builder.appendQueryParameter("source", "myapp"); // معلمة استعلام لتحديد التطبيق المصدر
+
+                Uri shareUri = builder.build();
+                String url = shareUri.toString();
 
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-
                 shareIntent.putExtra(Intent.EXTRA_TEXT, url);
-                shareIntent.setPackage(appPackageName); // تعيين حزمة التطبيق
-
                 startActivity(Intent.createChooser(shareIntent, "شارك عبر"));
             }
         });
 
 
+//from chatgpt
+//        <activity android:name=".MyLinkActivity">
+//    <intent-filter>
+//        <action android:name="android.intent.action.VIEW" />
+//        <category android:name="android.intent.category.DEFAULT" />
+//        <data android:scheme="https" android:host="example.com" android:pathPrefix="/product" />
+//    </intent-filter>
+//</activity>
+//
+//        public class MyLinkActivity extends AppCompatActivity {
+//            @Override
+//            protected void onCreate(Bundle savedInstanceState) {
+//                super.onCreate(savedInstanceState);
+//                setContentView(R.layout.activity_my_link);
+//
+//                Intent intent = getIntent();
+//                Uri data = intent.getData(); // الحصول على البيانات المرتبطة بالرابط المشترك
+//
+//                if (data != null) {
+//                    // قم بمعالجة البيانات والقيام بالإجراءات المناسبة
+//                    String productId = data.getQueryParameter("id");
+//                    // قم بتنفيذ الإجراءات المطلوبة باستخدام معرف المنتج
+//                }
+//            }
+//        }
 
 
         }
