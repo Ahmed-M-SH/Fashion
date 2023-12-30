@@ -15,15 +15,17 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.example.fashion.Activity.DetailActivity;
 import com.example.fashion.Domain.PopularDomain;
+import com.example.fashion.Domain.ProductResult;
+import com.example.fashion.Helper.ServerDetail;
 import com.example.fashion.R;
 
 import java.util.ArrayList;
 
 public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.Viewholder> {
-    ArrayList<PopularDomain> items;
+    ProductResult items;
     Context context;
 
-    public PopularListAdapter(ArrayList<PopularDomain> items) {
+    public PopularListAdapter(ProductResult items) {
         this.items = items;
     }
 
@@ -37,10 +39,18 @@ public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PopularListAdapter.Viewholder holder, int position) {
-            holder.titleTxt.setText(items.get(position).getTitle());
-            holder.feeTxt.setText("$"+items.get(position).getPrice());
-            holder.ScoreTxt.setText(""+items.get(position).getScore());
-            int drawableResourceId = holder.itemView.getResources().getIdentifier(items.get(position).getPicUrl(),
+            holder.titleTxt.setText(items.getResults().get(position).getName());
+            holder.feeTxt.setText("$"+items.getResults().get(position).getPrice());
+            holder.ScoreTxt.setText(""+items.getResults().get(position).getRate());
+        String image = "";
+
+        if (items.getResults().get(position).getImage().contains("http"))
+                 image = items.getResults().get(position).getImage();
+        else
+            image = ServerDetail.endpoint+items.getResults().get(position).getImage();
+
+
+        int drawableResourceId = holder.itemView.getResources().getIdentifier(image,
                     "drawable",holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext())
                 .load(drawableResourceId)
@@ -48,7 +58,7 @@ public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.
                 .into(holder.pic);
         holder.itemView.setOnClickListener(view -> {
             Intent  intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
-            intent.putExtra("object", items.get(position));
+            intent.putExtra("product_id", items.getResults().get(position).getId());
             holder.itemView.getContext().startActivity(intent);
         });
 
@@ -56,7 +66,7 @@ public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return items.getResults().size();
     }
     public class viewholder extends RecyclerView.ViewHolder {
         TextView titleTxt,feeTxt,ScoreTxt;
