@@ -46,11 +46,11 @@
                     app:icon_size="40dp"
                     app:icon_type="heart"
                     app:layout_constraintBottom_toBottomOf="@+id/backArrowBtn"
-                    app:layout_constraintStart_toEndOf="@+id/imageView6"
+                    app:layout_constraintStart_toEndOf="@+id/shareButton"
                     app:layout_constraintTop_toTopOf="@+id/backArrowBtn" />
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/shareButton"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:padding="8dp"

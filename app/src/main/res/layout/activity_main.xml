@@ -52,7 +52,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/notifiction_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -63,12 +63,12 @@
                     app:srcCompat="@drawable/bell" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/noitficatin_stetes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="7dp"
-                    app:layout_constraintBottom_toTopOf="@+id/imageView2"
+                    app:layout_constraintBottom_toTopOf="@+id/notifiction_btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:srcCompat="@drawable/red_circle" />
 
@@ -82,7 +82,7 @@
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                    app:layout_constraintTop_toBottomOf="@+id/noitficatin_stetes" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -175,7 +175,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:orientation="vertical">
@@ -188,26 +188,26 @@
                     android:layout_gravity="start|top"
                     android:layout_weight="1"
                     android:text="see all"
-                    android:textColor="@color/red"/>
+                    android:textColor="@color/red" />
 
 
                 <TextView
                     android:id="@+id/textView19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_gravity="end"
-                    android:text="popular product"
+                    android:layout_weight="1"
+                    android:text="قائمة المنتجات"
                     android:textColor="@color/black"
-                    android:textSize="19dp"
+                    android:textSize="25dp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/view1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:clipToPadding="false"
+                    android:clipToPadding="true"
                     android:paddingStart="5px"
                     android:paddingEnd="5px" />
             </LinearLayout>
@@ -219,7 +219,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorlayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -228,6 +228,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_gravity="bottom">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -339,7 +340,6 @@
             </LinearLayout>
 
         </com.google.android.material.bottomappbar.BottomAppBar>
-
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

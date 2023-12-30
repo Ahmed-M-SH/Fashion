@@ -36,7 +36,6 @@ private Button orderBtn;
         managmentCart=new ManagmentCart(this);
 
         initView();
-        setVariable();
         initList();
         calculateCart();
 
@@ -46,6 +45,13 @@ private Button orderBtn;
             public void onClick(View v) {
                 Intent intent = new Intent(CartActivity.this, PaymentActivity.class);
                 startActivity(intent);            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
         });
     }
 
@@ -82,9 +88,6 @@ private Button orderBtn;
     }
 
 
-    private void setVariable() {
-        backBtn.setOnClickListener(view -> finish());
-    }
 
     private void initView() {
         totalFeeTxt=findViewById(R.id.totalFeeTxt);
@@ -96,6 +99,7 @@ private Button orderBtn;
         backBtn=findViewById(R.id.backArrowBtn);
         emptyTxt=findViewById(R.id.emptyTxt);
         address=findViewById(R.id.address);
+
 
     }
 }

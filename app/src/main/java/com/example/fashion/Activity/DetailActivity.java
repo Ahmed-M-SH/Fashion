@@ -3,6 +3,7 @@ package com.example.fashion.Activity;
 import static com.example.fashion.R.id.fovortieBtn;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -41,6 +42,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private int numberOrder = 1;
     private ManagmentCart managmentCart;
+    private ImageView shareButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +59,34 @@ public class DetailActivity extends AppCompatActivity {
         initView();
         getBundle();
         setReadMoreLink();
-    }
+
+        ImageView shareButton = findViewById(R.id.shareButton);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+                // قم بتنفيذ الإجراءات التي تود تنفيذها عند النقر على زر المشاركة
+                // على سبيل المثال، يمكنك فتح نافذة المشاركة وتضمين رابط
+                String productId = String.valueOf(titleTxt); // معرف المنتج
+                String appPackageName = "com.example.fashion"; // حزمة التطبيق الخاص بك
+                String url = "appfashion://Detail?id=" + productId; // الرابط الذي يحتوي على معرف المنتج
+
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+
+                shareIntent.putExtra(Intent.EXTRA_TEXT, url);
+                shareIntent.setPackage(appPackageName); // تعيين حزمة التطبيق
+
+                startActivity(Intent.createChooser(shareIntent, "شارك عبر"));
+            }
+        });
+
+
+
+
+        }
+
 
     private void setReadMoreLink() {
         String desText = descriptionTxt.getText().toString();

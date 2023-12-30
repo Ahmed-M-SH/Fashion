@@ -1,12 +1,14 @@
 package com.example.fashion.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.fashion.Adapter.PopularListAdapter;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         private LinearLayout profileBtn;
 
         private LinearLayout wishlistBtn;
+        private ImageView notifiction_btn;
 
 
     @Override
@@ -46,6 +49,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, FovoriteActivity.class);
+                startActivity(intent);            }
+        });
+        notifiction_btn = findViewById(R.id.notifiction_btn);
+        notifiction_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NotificationActivity.class);
                 startActivity(intent);            }
         });
     }
@@ -80,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 "alskdflksjfddddddddddddddddddddd\n" +
                 "sdddddddddddddddddddddddddddddddddddddddddddd\n", "pic1", 13, 33, 7500.5));
         recyclerView = findViewById(R.id.view1);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         adapterPupolar = new PopularListAdapter(item);
         recyclerView.setAdapter(adapterPupolar);
 
