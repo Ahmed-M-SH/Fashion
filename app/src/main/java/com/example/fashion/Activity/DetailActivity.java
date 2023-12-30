@@ -1,6 +1,9 @@
 package com.example.fashion.Activity;
 
-import android.app.Activity;
+import static com.example.fashion.R.id.fovortieBtn;
+
+import android.annotation.SuppressLint;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
@@ -22,6 +25,7 @@ import com.example.fashion.Domain.PopularDomain;
 import com.example.fashion.Domain.ReviewDomain;
 import com.example.fashion.Helper.ManagmentCart;
 import com.example.fashion.R;
+import com.like.LikeButton;
 
 import java.util.ArrayList;
 
@@ -29,11 +33,13 @@ public class DetailActivity extends AppCompatActivity {
     private Button addToCartBtn;
     private RecyclerView.Adapter adapterReview;
     private RecyclerView recyclerReview;
-    private TextView titleTxt, feeTxt,descriptionTxt,reviewTxt,scoreTxt,readMoreTxt;
-    private ImageView picFood,backBtn;
+    private TextView titleTxt, feeTxt, descriptionTxt, reviewTxt, scoreTxt, readMoreTxt;
+    private ImageView picFood, backBtn;
     private PopularDomain object;
     private ReviewDomain reviewObject;
-    private int numberOrder=1;
+    private LikeButton fovortieBtn;
+
+    private int numberOrder = 1;
     private ManagmentCart managmentCart;
 
     @Override
@@ -44,9 +50,9 @@ public class DetailActivity extends AppCompatActivity {
 
         managmentCart = new ManagmentCart(this);
 
-        backBtn=findViewById(R.id.backArrowBtn);
+        backBtn = findViewById(R.id.backArrowBtn);
         backBtn.setOnClickListener(view -> finish());
-        managmentCart=new ManagmentCart(this);
+        managmentCart = new ManagmentCart(this);
 
         initView();
         getBundle();
@@ -64,7 +70,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         };
 
-        spannableString.setSpan(clickableSpan, desText.length(),desText.length()+moreText.length(),SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE );
+        spannableString.setSpan(clickableSpan, desText.length(), desText.length() + moreText.length(), SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
         descriptionTxt.setText(spannableString);
         descriptionTxt.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -78,17 +84,17 @@ public class DetailActivity extends AppCompatActivity {
     private void getBundle() {
         object = (PopularDomain) getIntent().getSerializableExtra("object");
         int drawableResourceId = this.getResources().getIdentifier(object.getPicUrl(),
-                "drawable",this.getPackageName());
+                "drawable", this.getPackageName());
 
         Glide.with(this)
                 .load(drawableResourceId)
                 .into(picFood);
 
-        titleTxt.setText(""+object.getTitle());
+        titleTxt.setText("" + object.getTitle());
         descriptionTxt.setText(object.getDescription());
-        reviewTxt.setText(""+object.getReview()+"");
-        scoreTxt.setText(object.getScore()+"");
-        feeTxt.setText("$"+object.getPrice());
+        reviewTxt.setText("" + object.getReview() + "");
+        scoreTxt.setText(object.getScore() + "");
+        feeTxt.setText("$" + object.getPrice());
 
         addToCartBtn.setOnClickListener(view -> {
             object.setNumberinCart(numberOrder);
@@ -101,38 +107,58 @@ public class DetailActivity extends AppCompatActivity {
                 expendTextView();
             }
         });
-         }
+    }
 
     private void initView() {
 //        private TextView titleTxt,feeTxt,descriptionTxt,reviewTxt,scoreTxt;
 
-        ArrayList<ReviewDomain> item=new ArrayList<>();
-        item.add(new ReviewDomain("Ahmed","2023-3-3","this is bad product"));
-        item.add(new ReviewDomain("Ahmed","2023-3-3","this is bad product"));
-        item.add(new ReviewDomain("Ahmed","2023-3-3","this is bad product"));
-        item.add(new ReviewDomain("Ahmed","2023-3-3","this is bad product"));
-        item.add(new ReviewDomain("Ahmed","2023-3-3","this is bad product"));
-        item.add(new ReviewDomain("Ahmed","2023-3-3","this is bad product"));
-        item.add(new ReviewDomain("Ahmed","2023-3-3","this is bad product"));
-        item.add(new ReviewDomain("Ahmed","2023-3-3","this is bad product"));
-        item.add(new ReviewDomain("Ahmed","2023-3-3","this is bad product"));
+        ArrayList<ReviewDomain> item = new ArrayList<>();
+        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
+        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
+        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
+        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
+        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
+        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
+        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
+        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
+        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
         recyclerReview = findViewById(R.id.recylerReview);
-        recyclerReview.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        recyclerReview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-adapterReview = new ReviewAdapter(item);
-recyclerReview.setAdapter(adapterReview);
+        adapterReview = new ReviewAdapter(item);
+        recyclerReview.setAdapter(adapterReview);
         addToCartBtn = findViewById(R.id.addToCartBtn);
         titleTxt = findViewById(R.id.titleTxt);
         feeTxt = findViewById(R.id.feeTxt);
         descriptionTxt = findViewById(R.id.descriptionTxt);
         reviewTxt = findViewById(R.id.reviewTxt);
-        scoreTxt=findViewById(R.id.rateTxt);
+        scoreTxt = findViewById(R.id.rateTxt);
         picFood = findViewById(R.id.MakUp);
         readMoreTxt = findViewById(R.id.readMoreTxt);
+        fovortieBtn =findViewById(R.id.fovortieBtn);
+//         fovortieBtn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    // Handle the click event
+////                    toggleImageViewColor();
+//                }
+//            });
+        }
 
 
 
 
 
+
+//        private void toggleImageViewColor() {
+//            ColorDrawable currentColor = (ColorDrawable) fovortieBtn.getBackground();
+//            int currentColorRes = currentColor.getColor();
+//
+//            int newColorRes = (currentColorRes == getResources().getColor(R.color.black))
+//                    ? getResources().getColor(R.color.red)
+//                    : getResources().getColor(R.color.black);
+//
+//            fovortieBtn.setBackgroundColor(newColorRes);
+//        }
     }
-}
+

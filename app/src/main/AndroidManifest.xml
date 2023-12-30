@@ -12,13 +12,13 @@
         android:theme="@style/Theme.Fashion"
         tools:targetApi="31">
         <activity
-            android:name=".ProfileActivity"
+            android:name=".Activity.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".PaymentActivity"
+            android:name=".Activity.PaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".FovoriteActivity"
+            android:name=".Activity.FovoriteActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.splashActivity"

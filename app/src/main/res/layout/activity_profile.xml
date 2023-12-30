@@ -24,17 +24,51 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:background="@color/grey">
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="60dp"
-                    android:layout_height="40dp"
+                <RelativeLayout
+                    android:id="@+id/relativeLayout"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:padding="16dp"
+
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textView32"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/btn_4" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_profile"
+                        android:layout_width="100dp"
+                        android:layout_height="80dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:contentDescription="Image"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/btn_4"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/cheng_pro_Btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_below="@+id/img_profile"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-0dp"
+                        android:layout_marginBottom="0dp"
+                        android:background="@drawable/cheng_img_pro"
+                        android:text="تغيير"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/textView32"
@@ -46,7 +80,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView4" />
+                    app:layout_constraintTop_toTopOf="@+id/relativeLayout" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,30 +133,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp">
-
-                <TextView
-                    android:id="@+id/textView42"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="تغيير صورة الحساب"
-                    android:textSize="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/imageView9"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView42"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView42"
-                    app:srcCompat="@drawable/btn_4" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -312,7 +322,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView26"
+            android:id="@+id/logoutBtn"
             android:layout_width="30dp"
             android:layout_height="40dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView47"

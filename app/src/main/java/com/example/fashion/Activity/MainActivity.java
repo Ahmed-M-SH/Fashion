@@ -18,6 +18,10 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
         private RecyclerView.Adapter adapterPupolar;
         private RecyclerView recyclerView;
+        private RecyclerView recycler_categorie;
+        private LinearLayout profileBtn;
+
+        private LinearLayout wishlistBtn;
 
 
     @Override
@@ -30,8 +34,23 @@ public class MainActivity extends AppCompatActivity {
 
         bottom_navigation();
 
-
+        profileBtn = findViewById(R.id.profileBtn);
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);            }
+        });
+        wishlistBtn = findViewById(R.id.wishlistBtn);
+        wishlistBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FovoriteActivity.class);
+                startActivity(intent);            }
+        });
     }
+
+
 
     private void bottom_navigation() {
         LinearLayout homeBtn = findViewById(R.id.homeBtn);
@@ -41,30 +60,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        ArrayList<PopularDomain> item=new ArrayList<>();
-        item.add(new PopularDomain("slkdjflsadjflksjfd","jsdfsfkjksafdjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj\n" +
+        ArrayList<PopularDomain> item = new ArrayList<>();
+        item.add(new PopularDomain("slkdjflsadjflksjfd", "jsdfsfkjksafdjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj\n" +
                 "lksjdflksjdfffffffffffffffffffjkllffffffffffffffff\n" +
                 "lksadffffffffffffffffffffffffffffffffffffffff\n" +
-                "lsdkdddddddddddddddddddddddddddddddddddddddddddddd","pic1",15,20,4152000));
-        item.add(new PopularDomain("asdflkjfhhkjhhhhhhh","sdkkkkkkkkkkkkkkkkkkkkkkkkkkkkdd\n" +
+                "lsdkdddddddddddddddddddddddddddddddddddddddddddddd", "pic1", 15, 20, 4152000));
+        item.add(new PopularDomain("asdflkjfhhkjhhhhhhh", "sdkkkkkkkkkkkkkkkkkkkkkkkkkkkkdd\n" +
                 "sdddddddddddddddddddddddddddddddddddddddddddddddddddd\n" +
                 "dfffffffffffffffffffffffffffffffffffffffffffffffffffff\n" +
                 "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbf\n" +
                 "gggfgfdgfdgfdgfdgdgfdgdgfdgfdgfdgdgdgdgdgdgf\n" +
-                "hjgfhgfhgfhfhgfhfhgfhfhfhfhfhfhf\n","pic2",10,25,50025));
-        item.add(new PopularDomain("sdlkfjlsdjflsakjdf","iiiiiiiiiiiiiiiiiiiiiiiiiisoadifoosdf\n" +
+                "hjgfhgfhgfhfhgfhfhgfhfhfhfhfhfhf\n", "pic2", 10, 25, 50025));
+        item.add(new PopularDomain("sdlkfjlsdjflsakjdf", "iiiiiiiiiiiiiiiiiiiiiiiiiisoadifoosdf\n" +
                 "allllllllllllllllllllllllllllllllllllllllksdlf\n" +
                 "laksdddddkkkdkjfkgjgggggggggggggggggg\n" +
                 "asdffffffffffffffffffffffffffffffffff\n" +
-                "dfffffffffffffffffffffffff","pic3",13,30,412256.5));
-        item.add(new PopularDomain("fffffffffsdfdd","asldlklklkkkkkkkkkkkkkkkkkkklsldfllkjlkdjjl\n" +
+                "dfffffffffffffffffffffffff", "pic3", 13, 30, 412256.5));
+        item.add(new PopularDomain("fffffffffsdfdd", "asldlklklkkkkkkkkkkkkkkkkkkklsldfllkjlkdjjl\n" +
                 "alskdflksjfddddddddddddddddddddd\n" +
-                "sdddddddddddddddddddddddddddddddddddddddddddd\n","pic1",13,33,7500.5));
-        recyclerView =findViewById(R.id.view1);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        adapterPupolar=new PopularListAdapter(item);
+                "sdddddddddddddddddddddddddddddddddddddddddddd\n", "pic1", 13, 33, 7500.5));
+        recyclerView = findViewById(R.id.view1);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        adapterPupolar = new PopularListAdapter(item);
         recyclerView.setAdapter(adapterPupolar);
 
 
     }
 }
+
+
+
+
