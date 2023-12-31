@@ -23,6 +23,8 @@ import com.example.fashion.R;
 import com.google.gson.Gson;
 
 public class MainActivity extends AppCompatActivity {
+
+        private String endpoint = ServerDetail.endpoint + "/api/products/";
         private RecyclerView.Adapter adapterPupolar;
         private RecyclerView recyclerView;
        private RequestQueue requestProductQueue, requestCategoryQueue;
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendProductRequest(){
         requestProductQueue = Volley.newRequestQueue(this);
-        productStringRequest =new StringRequest(Request.Method.GET, "http://192.168.1.2:8000/api/products/?page=1", response -> {
+        productStringRequest =new StringRequest(Request.Method.GET, endpoint, response -> {
             Gson gson = new Gson();
             ProductResult item = gson.fromJson(response, ProductResult.class);
             recyclerView.setLayoutManager(new GridLayoutManager(this, 2));

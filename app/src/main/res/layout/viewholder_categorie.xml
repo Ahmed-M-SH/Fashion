@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView12"
+            android:id="@+id/image"
             android:layout_width="100dp"
             android:layout_height="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/titleTxt"
         android:layout_width="59dp"
         android:layout_height="20dp"
         android:text="MakeUp5"

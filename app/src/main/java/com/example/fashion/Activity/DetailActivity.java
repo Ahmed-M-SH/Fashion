@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,70 +22,65 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.fashion.Adapter.ReviewAdapter;
 import com.example.fashion.Domain.PopularDomain;
+import com.example.fashion.Domain.ProductDetail;
+import com.example.fashion.Domain.ProductResult;
 import com.example.fashion.Domain.ReviewDomain;
 import com.example.fashion.Helper.ManagmentCart;
+import com.example.fashion.Helper.ServerDetail;
 import com.example.fashion.R;
+import com.google.gson.Gson;
 import com.like.LikeButton;
 
 import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
+    private String endpoint = ServerDetail.endpoint + "/api/products/";
+
     private Button addToCartBtn;
     private RecyclerView.Adapter adapterReview;
     private RecyclerView recyclerReview;
     private TextView titleTxt, feeTxt, descriptionTxt, reviewTxt, scoreTxt, readMoreTxt;
-    private ImageView picFood, backBtn;
-    private PopularDomain object;
+    private ImageView picFood, backBtn,shareButton;
     private ReviewDomain reviewObject;
     private LikeButton fovortieBtn;
 
     private int numberOrder = 1;
     private ManagmentCart managmentCart;
-    private ImageView shareButton;
+
+    private StringRequest productStringRequest;
+    private RequestQueue requestProductQueue;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detaile);
 
-
-        managmentCart = new ManagmentCart(this);
-
-        backBtn = findViewById(R.id.backArrowBtn);
-        backBtn.setOnClickListener(view -> finish());
-        managmentCart = new ManagmentCart(this);
-
         initView();
         getBundle();
         setReadMoreLink();
+        backBtn.setOnClickListener(view -> finish());
+
+        sendRequest();
 
 
-        ImageView shareButton = findViewById(R.id.shareButton);
-        shareButton.setOnClickListener(new View.OnClickListener() {
-            private String productName = "اسم المنتج";
 
-            @Override
-            public void onClick(View v) {
-                String productId = "titleTxt"; // معرف المنتج
-                String baseUrl = "https://example.com/product"; // الجزء الثابت من الرابط
+        }
 
-                Uri.Builder builder = Uri.parse(baseUrl).buildUpon();
-                builder.appendQueryParameter("id", productId);
-                builder.appendQueryParameter("source", "myapp"); // معلمة استعلام لتحديد التطبيق المصدر
+    private void sendRequest() {
 
-                Uri shareUri = builder.build();
-                String url = shareUri.toString();
 
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, url);
-                startActivity(Intent.createChooser(shareIntent, "شارك عبر"));
-            }
-        });
 
+
+    }
+
+    private void initShare() {
 
 //from chatgpt
 //        <activity android:name=".MyLinkActivity">
@@ -112,9 +108,29 @@ public class DetailActivity extends AppCompatActivity {
 //            }
 //        }
 
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            private String productName = "اسم المنتج";
 
-        }
+            @Override
+            public void onClick(View v) {
+                String productId = "titleTxt"; // معرف المنتج
+                String baseUrl = "https://example.com/product"; // الجزء الثابت من الرابط
 
+                Uri.Builder builder = Uri.parse(baseUrl).buildUpon();
+                builder.appendQueryParameter("id", productId);
+                builder.appendQueryParameter("source", "myapp"); // معلمة استعلام لتحديد التطبيق المصدر
+
+                Uri shareUri = builder.build();
+                String url = shareUri.toString();
+
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, url);
+                startActivity(Intent.createChooser(shareIntent, "شارك عبر"));
+            }
+        });
+
+    }
 
     private void setReadMoreLink() {
         String desText = descriptionTxt.getText().toString();
@@ -139,23 +155,38 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void getBundle() {
-        object = (PopularDomain) getIntent().getSerializableExtra("object");
-        int drawableResourceId = this.getResources().getIdentifier(object.getPicUrl(),
-                "drawable", this.getPackageName());
+        int productId = getIntent().getIntExtra("product_id", 0);
 
-        Glide.with(this)
-                .load(drawableResourceId)
-                .into(picFood);
+        requestProductQueue = Volley.newRequestQueue(this);
+        productStringRequest =new StringRequest(Request.Method.GET, endpoint+productId+'/', response -> {
+            Gson gson = new Gson();
+            ProductDetail item = gson.fromJson(response, ProductDetail.class);
+            Glide.with(this)
+                    .load(item.getImage())
+                    .into(picFood);
 
-        titleTxt.setText("" + object.getTitle());
-        descriptionTxt.setText(object.getDescription());
-        reviewTxt.setText("" + object.getReview() + "");
-        scoreTxt.setText(object.getScore() + "");
-        feeTxt.setText("$" + object.getPrice());
+            titleTxt.setText("" + item.getName());
+            descriptionTxt.setText(item.getDescription());
+            reviewTxt.setText("" + item.getReviewCount() + "");
+            scoreTxt.setText(item.getRate() + "");
+            feeTxt.setText("$" + item.getPrice());
+            if(item.getInFavorite())
+                fovortieBtn.setLiked(true);
+            recyclerReview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+//
+        adapterReview = new ReviewAdapter(item);
+            recyclerReview.setAdapter(adapterReview);
 
+
+        }, error -> {
+            Log.i("RESPONSE", "OnErrorResponse: " + error.toString());
+
+
+        });
+        requestProductQueue.add(productStringRequest);
         addToCartBtn.setOnClickListener(view -> {
-            object.setNumberinCart(numberOrder);
-            managmentCart.insertFood(object);
+//            .setNumberinCart(numberOrder);
+//            managmentCart.insertFood(item);
         });
 
         readMoreTxt.setOnClickListener(new View.OnClickListener() {
@@ -169,21 +200,8 @@ public class DetailActivity extends AppCompatActivity {
     private void initView() {
 //        private TextView titleTxt,feeTxt,descriptionTxt,reviewTxt,scoreTxt;
 
-        ArrayList<ReviewDomain> item = new ArrayList<>();
-        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
-        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
-        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
-        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
-        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
-        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
-        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
-        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
-        item.add(new ReviewDomain("Ahmed", "2023-3-3", "this is bad product"));
-        recyclerReview = findViewById(R.id.recylerReview);
-        recyclerReview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        adapterReview = new ReviewAdapter(item);
-        recyclerReview.setAdapter(adapterReview);
+        recyclerReview = findViewById(R.id.recylerReview);
         addToCartBtn = findViewById(R.id.addToCartBtn);
         titleTxt = findViewById(R.id.titleTxt);
         feeTxt = findViewById(R.id.feeTxt);
@@ -193,13 +211,10 @@ public class DetailActivity extends AppCompatActivity {
         picFood = findViewById(R.id.MakUp);
         readMoreTxt = findViewById(R.id.readMoreTxt);
         fovortieBtn =findViewById(R.id.fovortieBtn);
-//         fovortieBtn.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    // Handle the click event
-////                    toggleImageViewColor();
-//                }
-//            });
+        shareButton = findViewById(R.id.shareButton);
+        managmentCart = new ManagmentCart(this);
+        backBtn = findViewById(R.id.backArrowBtn);
+
         }
 
 

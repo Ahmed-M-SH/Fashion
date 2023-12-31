@@ -10,17 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.fashion.Domain.ProductDetail;
+import com.example.fashion.Domain.Review;
 import com.example.fashion.Domain.ReviewDomain;
 import com.example.fashion.R;
+import com.like.LikeButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.Viewholder>{
-    ArrayList<ReviewDomain> items;
+    ProductDetail items;
     Context context;
 
 
-    public ReviewAdapter(ArrayList<ReviewDomain> items) {
+    public ReviewAdapter(ProductDetail items) {
         this.items = items;
     }
 
@@ -35,25 +39,32 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.Viewholder
 
     @Override
     public void onBindViewHolder(@NonNull ReviewAdapter.Viewholder holder, int position) {
-        holder.reviewTxt.setText(items.get(position).getReviewText());
-        holder.userReview.setText(items.get(position).getReviewUser());
-        holder.dataReview.setText(items.get(position).getReviewDate());
+        holder.reviewTxt.setText(items.getReview().get(position).getReviewText());
+        holder.userReview.setText(items.getReview().get(position).getUser());
+        holder.dataReview.setText(items.getReview().get(position).getReviewDate());
+        holder.nump_like.setText(items.getReview().get(position).getLikesCount()+"");
+        if(items.getReview().get(position).getIsLiked())
+            holder.fovortieBtn.setLiked(true);
+
     }
 
     @Override
     public int getItemCount() {
-        return this.items.size();
+        return this.items.getReview().size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView userReview,dataReview,reviewTxt;
+        TextView userReview,dataReview,reviewTxt,nump_like;
+        LikeButton fovortieBtn;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             userReview=itemView.findViewById(R.id.userReview);
             dataReview=itemView.findViewById(R.id.dataReview);
             reviewTxt=itemView.findViewById(R.id.reviewTxt);
+            fovortieBtn = itemView.findViewById(R.id.fovortieBtn);
+            nump_like = itemView.findViewById(R.id.nump_like);
 
         }
     }

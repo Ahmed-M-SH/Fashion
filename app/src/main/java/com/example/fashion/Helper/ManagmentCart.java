@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.fashion.Domain.PopularDomain;
+import com.example.fashion.Domain.ProductDetail;
 import com.example.fashion.R;
 
 import java.util.ArrayList;
@@ -17,25 +18,25 @@ public class ManagmentCart {
         this.tinyDB = new TinyDB(context);
     }
 
-    public void insertFood(PopularDomain item){
-        ArrayList<PopularDomain> listPop = getListCart();
-        boolean existAlready=false;
+    public void insertFood(ProductDetail item){
+//        ArrayList<ProductDetail> listPop = getListCart();
+//        boolean existAlready=false;
+//
+//        int n=0;
+//        for (int i=0;i<listPop.size();i++){
+//            if(listPop.get(i).getId().equals(item.getId())){
+//                existAlready = true;
+//                n=i;
+//                break;
+//            }
+//        }
+//        if(existAlready)
+////            listPop.get(n).setNumberinCart(item.getNumberinCart());
+//        else
+//            listPop.add(item);
 
-        int n=0;
-        for (int i=0;i<listPop.size();i++){
-            if(listPop.get(i).getTitle().equals(item.getTitle())){
-                existAlready = true;
-                n=i;
-                break;
-            }
-        }
-        if(existAlready)
-            listPop.get(n).setNumberinCart(item.getNumberinCart());
-        else
-            listPop.add(item);
-
-        tinyDB.putListObject("CartList",listPop);
-        Toast.makeText(context, R.string.add_to_cart_text, Toast.LENGTH_SHORT).show();
+//        tinyDB.putListObject("CartList",listPop);
+//        Toast.makeText(context, R.string.add_to_cart_text, Toast.LENGTH_SHORT).show();
 
     }
 

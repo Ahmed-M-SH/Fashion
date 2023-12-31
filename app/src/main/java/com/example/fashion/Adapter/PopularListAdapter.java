@@ -44,18 +44,20 @@ public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.
             holder.ScoreTxt.setText(""+items.getResults().get(position).getRate());
         String image = "";
 
-        if (items.getResults().get(position).getImage().contains("http"))
+        if (items.getResults().get(position).getImage().startsWith("http"))
                  image = items.getResults().get(position).getImage();
         else
             image = ServerDetail.endpoint+items.getResults().get(position).getImage();
 
 
-        int drawableResourceId = holder.itemView.getResources().getIdentifier(image,
-                    "drawable",holder.itemView.getContext().getPackageName());
-        Glide.with(holder.itemView.getContext())
-                .load(drawableResourceId)
-                .transform(new GranularRoundedCorners(30,30,0,0))
-                .into(holder.pic);
+//        int drawableResourceId = holder.itemView.getResources().getIdentifier(image,
+//                    "drawable",holder.itemView.getContext().getPackageName());
+//        Glide.with(holder.itemView.getContext())
+//                .load(drawableResourceId)
+//                .transform(new GranularRoundedCorners(30,30,0,0))
+//                .into(holder.pic);
+        Glide.with(holder.itemView.getContext()).load(image).into(holder.pic);
+
         holder.itemView.setOnClickListener(view -> {
             Intent  intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
             intent.putExtra("product_id", items.getResults().get(position).getId());
