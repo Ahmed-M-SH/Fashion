@@ -2,11 +2,14 @@ package com.example.fashion.Helper;
 
 import com.example.fashion.Domain.ProductDetail;
 import com.example.fashion.Domain.ProductResult;
+import com.example.fashion.Domain.UserAuthentication;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public  interface ServerDetail {
@@ -18,5 +21,6 @@ public  interface ServerDetail {
 
     @GET("/api/products/{productId}/")
     Call<ProductDetail> getProductDetail(@Path("productId") int productId);
-
+    @POST("/api/auth/login/")
+    Call<UserAuthentication> getUserAuthentication(@Body UserAuthentication userAuthentication);
 }
