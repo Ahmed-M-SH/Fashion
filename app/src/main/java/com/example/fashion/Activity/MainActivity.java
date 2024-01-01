@@ -10,17 +10,29 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.fashion.Adapter.PopularListAdapter;
+import com.example.fashion.Domain.ProductDetail;
 import com.example.fashion.Domain.ProductResult;
+import com.example.fashion.Helper.RetrofitClient;
 import com.example.fashion.Helper.ServerDetail;
 import com.example.fashion.R;
 import com.google.gson.Gson;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,16 +59,49 @@ public class MainActivity extends AppCompatActivity {
         init();
 
         bottom_navigation();
-        sendProductRequest();
+//        sendProductRequest();
 
+        sendRetrofitProductRequest();
     }
 
 
+    private  void sendRetrofitProductRequest() {
+        Call< ProductResult > call = RetrofitClient.getInstance()
+                .getServerDetail()
+                .getProduct();
+        call.enqueue(new Callback<ProductResult>() {
+            @Override
+            public void onResponse(Call<ProductResult> call, Response<ProductResult> response) {
+                ProductResult   item = response.body();
+                recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+                Log.i("RESPONSE", "OnResponse: " + item);
+                adapterPupolar = new PopularListAdapter(item);
+                recyclerView.setAdapter(adapterPupolar);
+                Log.i("RESPONSE", "OnResponse: " + item);
+            }
+
+
+            @Override
+            public void onFailure(Call<ProductResult> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG)
+                        .show();
+            }
+        });
+//        requestProductQueue = Volley.newRequestQueue(this);
+//        requestProductQueue.add(call.body());
+
+
+    }
     private void sendProductRequest(){
         requestProductQueue = Volley.newRequestQueue(this);
         productStringRequest =new StringRequest(Request.Method.GET, endpoint, response -> {
+
             Gson gson = new Gson();
-            ProductResult item = gson.fromJson(response, ProductResult.class);
+            response.getBytes(StandardCharsets.UTF_8);
+            Reader reader = new InputStreamReader(new ByteArrayInputStream(response.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+
+            // Use the Gson.fromJson method that takes a Reader
+            ProductResult item = gson.fromJson(reader, ProductResult.class);
             recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
             adapterPupolar = new PopularListAdapter(item);
             recyclerView.setAdapter(adapterPupolar);

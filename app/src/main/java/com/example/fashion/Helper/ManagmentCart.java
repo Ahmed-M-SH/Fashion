@@ -30,11 +30,11 @@ public class ManagmentCart {
 //                break;
 //            }
 //        }
-//        if(existAlready)
-////            listPop.get(n).setNumberinCart(item.getNumberinCart());
-//        else
-//            listPop.add(item);
-
+////        if(existAlready)
+//////            listPop.get(n).setNumberinCart(item.getNumberinCart());
+////        else
+////            listPop.add(item);
+//
 //        tinyDB.putListObject("CartList",listPop);
 //        Toast.makeText(context, R.string.add_to_cart_text, Toast.LENGTH_SHORT).show();
 

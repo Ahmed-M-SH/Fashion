@@ -22,8 +22,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.nio.charset.StandardCharsets;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
@@ -33,12 +36,27 @@ import com.example.fashion.Domain.ProductDetail;
 import com.example.fashion.Domain.ProductResult;
 import com.example.fashion.Domain.ReviewDomain;
 import com.example.fashion.Helper.ManagmentCart;
+import com.example.fashion.Helper.RetrofitClient;
 import com.example.fashion.Helper.ServerDetail;
 import com.example.fashion.R;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.like.LikeButton;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Toast;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
 
 public class DetailActivity extends AppCompatActivity {
     private String endpoint = ServerDetail.endpoint + "/api/products/";
@@ -63,22 +81,16 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detaile);
 
         initView();
-        getBundle();
+//        getBundle();
+        getBundleWithRetrofit();
         setReadMoreLink();
         backBtn.setOnClickListener(view -> finish());
 
-        sendRequest();
-
+//        sendRequest();
+//sendRequest();
 
 
         }
-
-    private void sendRequest() {
-
-
-
-
-    }
 
     private void initShare() {
 
@@ -154,14 +166,15 @@ public class DetailActivity extends AppCompatActivity {
         readMoreTxt.setVisibility(View.GONE);
     }
 
-    private void getBundle() {
-        int productId = getIntent().getIntExtra("product_id", 0);
-
-        requestProductQueue = Volley.newRequestQueue(this);
-        productStringRequest =new StringRequest(Request.Method.GET, endpoint+productId+'/', response -> {
-            Gson gson = new Gson();
-            ProductDetail item = gson.fromJson(response, ProductDetail.class);
-            Glide.with(this)
+private void getBundleWithRetrofit(){
+    int productId = getIntent().getIntExtra("product_id", 0);
+    Call<ProductDetail> call = RetrofitClient.getInstance().getServerDetail().getProductDetail(productId);
+    call.enqueue(new Callback<ProductDetail>() {
+        @Override
+        public void onResponse(Call<ProductDetail> call, retrofit2.Response<ProductDetail> response) {
+            ProductDetail item = response.body();
+            // Populate UI elements with data
+            Glide.with(DetailActivity.this)
                     .load(item.getImage())
                     .into(picFood);
 
@@ -170,23 +183,87 @@ public class DetailActivity extends AppCompatActivity {
             reviewTxt.setText("" + item.getReviewCount() + "");
             scoreTxt.setText(item.getRate() + "");
             feeTxt.setText("$" + item.getPrice());
-            if(item.getInFavorite())
+            if (item.getInFavorite())
                 fovortieBtn.setLiked(true);
-            recyclerReview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-//
-        adapterReview = new ReviewAdapter(item);
+
+            recyclerReview.setLayoutManager(new LinearLayoutManager(DetailActivity.this, LinearLayoutManager.VERTICAL, false));
+
+            adapterReview = new ReviewAdapter(item);
             recyclerReview.setAdapter(adapterReview);
+        }
 
+        @Override
+        public void onFailure(Call<ProductDetail> call, Throwable t) {
+            Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+        }
+    });
+}
+    private void getBundle() {
+        int productId = getIntent().getIntExtra("product_id", 0);
 
-        }, error -> {
-            Log.i("RESPONSE", "OnErrorResponse: " + error.toString());
+        // Initialize the RequestQueue.
+        requestProductQueue = Volley.newRequestQueue(this);
+        StringRequest productStringRequest = new StringRequest(
+                Request.Method.GET,
+                endpoint + productId + '/',
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Parse the JSON response using Gson
+                        Gson gson = new Gson();
 
+                        try {
+                            // Convert the response string to a Reader with UTF-8 encoding
+                            byte[] responseBytes = response.getBytes(StandardCharsets.UTF_8);
 
-        });
+// Convert the byte array to a Reader
+                            Reader reader = new InputStreamReader(new ByteArrayInputStream(responseBytes), StandardCharsets.UTF_8);
+
+                            // Use the Gson.fromJson method that takes a Reader
+                            ProductDetail item = gson.fromJson(reader, ProductDetail.class);
+
+                            // Populate UI elements with data
+                            Glide.with(DetailActivity.this)
+                                    .load(item.getImage())
+                                    .into(picFood);
+
+                            titleTxt.setText("" + item.getName());
+                            descriptionTxt.setText(item.getDescription());
+                            reviewTxt.setText("" + item.getReviewCount() + "");
+                            scoreTxt.setText(item.getRate() + "");
+                            feeTxt.setText("$" + item.getPrice());
+                            if (item.getInFavorite())
+                                fovortieBtn.setLiked(true);
+
+                            recyclerReview.setLayoutManager(new LinearLayoutManager(DetailActivity.this, LinearLayoutManager.VERTICAL, false));
+
+                            adapterReview = new ReviewAdapter(item);
+                            recyclerReview.setAdapter(adapterReview);
+                        } catch (Exception e) {
+                            // Handle any exceptions that might occur during the decoding process
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("RESPONSE", "OnErrorResponse: " + error.toString());
+                        // Handle errors, e.g., display an error message to the user
+                    }
+                }
+        ) {
+            @Override
+            public String getBodyContentType() {
+                // Set the request content type to use UTF-8 encoding
+                return "application/json; charset=utf-8";
+            }
+        };
+
         requestProductQueue.add(productStringRequest);
         addToCartBtn.setOnClickListener(view -> {
-//            .setNumberinCart(numberOrder);
-//            managmentCart.insertFood(item);
+            // .setNumberinCart(numberOrder);
+            // managmentCart.insertFood(item);
         });
 
         readMoreTxt.setOnClickListener(new View.OnClickListener() {
@@ -232,5 +309,20 @@ public class DetailActivity extends AppCompatActivity {
 //
 //            fovortieBtn.setBackgroundColor(newColorRes);
 //        }
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // قم بفتح صفحة الـ Dialog عند الحاجة
+        showMyDialog();
+    }
+
+    private void showMyDialog() {
+        MyDialogFragment dialogFragment = new MyDialogFragment();
+        dialogFragment.showDialog(getSupportFragmentManager(), "MyDialogFragment");
+    }
+}
     }
 

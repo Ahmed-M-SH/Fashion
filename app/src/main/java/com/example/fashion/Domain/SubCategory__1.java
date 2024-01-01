@@ -1,19 +1,17 @@
 
 package com.example.fashion.Domain;
 
-import java.util.List;
-
-import com.example.fashion.Domain.SubCategory;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-public class Category {
+
+public class SubCategory__1 {
 
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("sub_category")
+    @SerializedName("parent_id")
     @Expose
-    private List<SubCategory> subCategory;
+    private Integer parentId;
     @SerializedName("name")
     @Expose
     private String name;
@@ -32,9 +30,6 @@ public class Category {
     @SerializedName("level")
     @Expose
     private Integer level;
-    @SerializedName("parent")
-    @Expose
-    private Object parent;
 
     public Integer getId() {
         return id;
@@ -44,12 +39,12 @@ public class Category {
         this.id = id;
     }
 
-    public List<SubCategory> getSubCategory() {
-        return subCategory;
+    public Integer getParentId() {
+        return parentId;
     }
 
-    public void setSubCategory(List<SubCategory> subCategory) {
-        this.subCategory = subCategory;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public String getName() {
@@ -98,14 +93,6 @@ public class Category {
 
     public void setLevel(Integer level) {
         this.level = level;
-    }
-
-    public Object getParent() {
-        return parent;
-    }
-
-    public void setParent(Object parent) {
-        this.parent = parent;
     }
 
 }

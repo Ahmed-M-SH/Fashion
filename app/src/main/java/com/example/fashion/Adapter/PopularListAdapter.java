@@ -2,6 +2,7 @@ package com.example.fashion.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PopularListAdapter.Viewholder holder, int position) {
-            holder.titleTxt.setText(items.getResults().get(position).getName());
+            holder.titleTxt.setText(""+items.getResults().get(position).getName());
             holder.feeTxt.setText("$"+items.getResults().get(position).getPrice());
             holder.ScoreTxt.setText(""+items.getResults().get(position).getRate());
         String image = "";
@@ -63,6 +64,8 @@ public class PopularListAdapter extends RecyclerView.Adapter<PopularListAdapter.
             intent.putExtra("product_id", items.getResults().get(position).getId());
             holder.itemView.getContext().startActivity(intent);
         });
+        Log.i("RESPONSE", "Response: "+items.getResults().get(position).getName() );
+
 
     }
 

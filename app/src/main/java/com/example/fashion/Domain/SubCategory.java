@@ -1,22 +1,57 @@
 
 package com.example.fashion.Domain;
 
-import javax.annotation.Generated;
+import java.util.List;
+
+import com.example.fashion.Domain.SubCategory__1;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class SubCategory {
 
-    @SerializedName("asdfasdfsdf")
+    @SerializedName("id")
     @Expose
-    private Asdfasdfsdf asdfasdfsdf;
+    private Integer id;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("level")
+    @Expose
+    private Integer level;
+    @SerializedName("sub_categories")
+    @Expose
+    private List<SubCategory__1> subCategories;
 
-    public Asdfasdfsdf getAsdfasdfsdf() {
-        return asdfasdfsdf;
+    public Integer getId() {
+        return id;
     }
 
-    public void setAsdfasdfsdf(Asdfasdfsdf asdfasdfsdf) {
-        this.asdfasdfsdf = asdfasdfsdf;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public List<SubCategory__1> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(List<SubCategory__1> subCategories) {
+        this.subCategories = subCategories;
     }
 
 }
