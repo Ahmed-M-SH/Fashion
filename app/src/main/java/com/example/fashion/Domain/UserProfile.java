@@ -33,6 +33,29 @@ public class UserProfile {
     @SerializedName("being_prepared_ordersast")
     @Expose
     private Integer beingPreparedOrdersast;
+    @SerializedName("password")
+    @Expose
+    private String password;
+    @SerializedName("user_auth")
+    @Expose
+    private UserAuthentication userAuth;
+
+    public UserAuthentication getUserAuth() {
+        return userAuth;
+    }
+
+    public void setUserAuth(UserAuthentication userAuth) {
+        this.userAuth = userAuth;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public UserProfile() {
+    }
 
     public Integer getId() {
         return id;

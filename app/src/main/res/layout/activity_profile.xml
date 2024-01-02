@@ -187,7 +187,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView46"
+                    android:id="@+id/txtEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="email"
@@ -223,7 +223,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView53"
+                    android:id="@+id/txtPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="phone"
@@ -248,7 +248,7 @@
                 android:layout_height="40dp">
 
                 <TextView
-                    android:id="@+id/textView49"
+                    android:id="@+id/txtBeing_prepared_ordersast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -287,7 +287,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView51"
+                    android:id="@+id/txtPrevious_ordersast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
