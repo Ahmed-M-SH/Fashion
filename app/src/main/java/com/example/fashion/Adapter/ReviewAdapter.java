@@ -37,10 +37,9 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.Viewholder
         holder.reviewTxt.setText(items.getReview().get(position).getReviewText());
         holder.userReview.setText(items.getReview().get(position).getUser());
         holder.dataReview.setText(items.getReview().get(position).getReviewDate());
-        holder.numb_like.setText(items.getReview().get(position).getLikesCount()+"");
+        holder.numb_like.setText(""+items.getReview().get(position).getLikesCount());
         if(items.getReview().get(position).getIsLiked())
             holder.fovortieBtn.setLiked(true);
-
     }
 
     @Override
