@@ -64,8 +64,6 @@ int drawableResourceId=holder.itemView.getContext().getResources()
             changeNumberItemsListener.change();
         });
 
-
-
     }
 
     @Override
